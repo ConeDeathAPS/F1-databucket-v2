@@ -1,44 +1,39 @@
-const Footer = require('./components/Footer.js');
-const NavbarLink = require('./components/NavbarLink.js');
-const Navbar = require('./components/Navbar.js');
-const HomePage = require('./components/HomePage.js');
-
 let appContainer = document.getElementById('appComponent');
+
+const pages = ['Home', 'Teams', 'Drivers', 'Tracks'];
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			activeComponent: 'Home',
+			activeComponent: pages[0],
 		};
+		this.setChosenPage = this.setChosenPage.bind(this);
+		this.getChosenPage = this.getChosenPage.bind(this);
 	}
+
+	setChosenPage(targetPage) {
+		this.setState({ activeComponent: targetPage });
+	}
+
+	getChosenPage() {
+		if (this.state.activeComponent === 'Home') {
+			return <HomePage />
+		} else if (this.state.activeComponent === 'Teams') {
+			return <TeamsPage />
+		} else if (this.state.activeComponent === 'Drivers') {
+			return <DriversPage />
+		} else if (this.state.activeComponent === 'Tracks') {
+			return <TracksPage />
+		}		
+	}
+
 	render() {
-		const pages = ['Home', 'Teams', 'Drivers', 'Tracks'];
+		const activePage = this.getChosenPage();
 		return (
 			<div id="componentContainer">
-				<Navbar activeComponent={this.state.activeComponent} pages={pages}/>
-				<main>
-					<h1>Default h1</h1>
-					<h2>Default h2</h2>
-					<h3>Default h3</h3>
-					<h4>Default h4</h4>
-					<h5>Default h5</h5>
-					<p>Paragraph</p>
-					<a href="#">Link</a>
-					<span>Span</span>
-					<ul>
-						<li>List 1</li>
-						<li>List 2</li>
-					</ul>
-					<button>Default</button>
-					<button className="primary">Primary</button>
-					<button className="primary raised">Primary Raised</button>
-					<button className="secondary">Secondary</button>
-					<button className="secondary raised">Secondary Raised</button>
-					<button className="secondary outline">Secondary Raised</button>
-					<input type="text" placeholder="Input" />
-					<textarea placeholder="Bigger input"></textarea>				
-				</main>
+				<Navbar activeComponent={this.state.activeComponent} onPageChange={this.setChosenPage} pages={pages}/>
+				{activePage}
 				<Footer />
 			</div>
 		);	

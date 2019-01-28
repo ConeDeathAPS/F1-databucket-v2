@@ -1,4 +1,4 @@
-module.exports = class NavbarLink extends React.Component {
+class NavbarLink extends React.Component {
 	constructor(props) {
 		super(props);
 	}

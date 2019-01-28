@@ -18,7 +18,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-module.exports =
+var Navbar =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(Navbar, _React$Component);
@@ -29,9 +29,6 @@ function (_React$Component) {
     _classCallCheck(this, Navbar);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Navbar).call(this, props));
-    _this.state = {
-      activeComponent: _this.props.activeComponent
-    };
     _this.onPageClick = _this.onPageClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -39,9 +36,7 @@ function (_React$Component) {
   _createClass(Navbar, [{
     key: "onPageClick",
     value: function onPageClick(clickedPage) {
-      this.setState({
-        activeComponent: clickedPage
-      });
+      this.props.onPageChange(clickedPage);
     }
   }, {
     key: "render",
@@ -51,7 +46,7 @@ function (_React$Component) {
       var navButtons = this.props.pages.map(function (page) {
         return React.createElement(NavbarLink, {
           page: page,
-          isActive: _this2.state.activeComponent === page,
+          isActive: _this2.props.activeComponent === page,
           key: page,
           click: _this2.onPageClick
         });

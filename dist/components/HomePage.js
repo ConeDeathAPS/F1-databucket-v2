@@ -18,7 +18,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-module.exports =
+var HomePage =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(HomePage, _React$Component);
@@ -32,7 +32,7 @@ function (_React$Component) {
   _createClass(HomePage, [{
     key: "render",
     value: function render() {
-      return React.createElement("main", null);
+      return React.createElement("main", null, React.createElement("h2", null, "Home"));
     }
   }]);
 

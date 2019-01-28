@@ -1,23 +1,18 @@
-module.exports = class Navbar extends React.Component {
+class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			activeComponent: this.props.activeComponent,
-		};
 		this.onPageClick = this.onPageClick.bind(this);
 	}
 
 	onPageClick(clickedPage) {
-		this.setState({
-			activeComponent: clickedPage,
-		});
+		this.props.onPageChange(clickedPage);
 	}
 
 	render() {
 		const navButtons = this.props.pages.map(page => (
 			<NavbarLink 
 				page={page} 
-				isActive={this.state.activeComponent === page} 
+				isActive={this.props.activeComponent === page} 
 				key={page} 
 				click={this.onPageClick}/>
 		));
