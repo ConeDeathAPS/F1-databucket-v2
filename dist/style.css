@@ -151,3 +151,16 @@ button.secondary:hover {
 button.secondary:active {
   background-color: rgba(0,188,212,0.08);
 }
+input,
+textarea {
+  font-size: 18px;
+  padding: 3px 5px;
+  border: 1px solid #263238;
+  border-radius: 4px;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 1px solid #00bcd4;
+  box-shadow: 0px 0px 3px 1px #00bcd4;
+}

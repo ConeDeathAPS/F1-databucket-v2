@@ -1,79 +1,9 @@
-'use strict';
+const Footer = require('./components/Footer.js');
+const NavbarLink = require('./components/NavbarLink.js');
+const Navbar = require('./components/Navbar.js');
+const HomePage = require('./components/HomePage.js');
 
 let appContainer = document.getElementById('appComponent');
-
-class Footer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
-
-	render() {
-		return (
-			<footer>
-				<p>
-					Version 0.1 - Check out the source on&nbsp;
-					<a href="https://github.com/conedeathaps/F1-databucket-v2"> 
-						github!
-					</a>
-				</p>
-			</footer>
-		)
-	}
-}
-
-class NavbarLink extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	render() {
-		const page = this.props.page;
-		const className = this.props.isActive ? 'active' : '';
-		return (
-			<a 
-				href="#"
-				className={className}
-				onClick={() => this.props.click(page)}>
-				{page}
-			</a>
-		);
-	}
-}
-
-class Navbar extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			activeComponent: this.props.activeComponent,
-		};
-		this.onPageClick = this.onPageClick.bind(this);
-	}
-
-	onPageClick(clickedPage) {
-		this.setState({
-			activeComponent: clickedPage,
-		});
-	}
-
-	render() {
-		const navButtons = this.props.pages.map(page => (
-			<NavbarLink 
-				page={page} 
-				isActive={this.state.activeComponent === page} 
-				key={page} 
-				click={this.onPageClick}/>
-		));
-		return (
-			<nav>
-				<h2>Formula 1 Databucket</h2>
-				<section>
-					{navButtons}
-				</section>
-			</nav>
-		);		
-	}
-}
 
 class App extends React.Component {
 	constructor(props) {
@@ -113,7 +43,6 @@ class App extends React.Component {
 			</div>
 		);	
 	}
-
 }
 
 ReactDOM.render(<App />, appContainer);
