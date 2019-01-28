@@ -19,7 +19,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 var appContainer = document.getElementById('appComponent');
-var pages = ['Home', 'Teams', 'Drivers', 'Tracks'];
+var pages = ['Home', 'Seasons', 'Teams', 'Drivers', 'Tracks'];
 
 var App =
 /*#__PURE__*/
@@ -52,6 +52,8 @@ function (_React$Component) {
     value: function getChosenPage() {
       if (this.state.activeComponent === 'Home') {
         return React.createElement(HomePage, null);
+      } else if (this.state.activeComponent === 'Seasons') {
+        return React.createElement(SeasonsPage, null);
       } else if (this.state.activeComponent === 'Teams') {
         return React.createElement(TeamsPage, null);
       } else if (this.state.activeComponent === 'Drivers') {

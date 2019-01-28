@@ -1,6 +1,6 @@
 let appContainer = document.getElementById('appComponent');
 
-const pages = ['Home', 'Teams', 'Drivers', 'Tracks'];
+const pages = ['Home', 'Seasons', 'Teams', 'Drivers', 'Tracks'];
 
 class App extends React.Component {
 	constructor(props) {
@@ -19,6 +19,8 @@ class App extends React.Component {
 	getChosenPage() {
 		if (this.state.activeComponent === 'Home') {
 			return <HomePage />
+		} else if (this.state.activeComponent === 'Seasons') {
+			return <SeasonsPage />
 		} else if (this.state.activeComponent === 'Teams') {
 			return <TeamsPage />
 		} else if (this.state.activeComponent === 'Drivers') {
