@@ -18,65 +18,81 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-var appContainer = document.getElementById('appComponent');
-var pages = ['Home', 'Seasons', 'Teams', 'Drivers', 'Tracks'];
-
-var App =
+var SeasonList =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(App, _React$Component);
+  _inherits(SeasonList, _React$Component);
 
-  function App(props) {
+  function SeasonList(props) {
     var _this;
 
-    _classCallCheck(this, App);
+    _classCallCheck(this, SeasonList);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SeasonList).call(this, props));
     _this.state = {
-      activeComponent: pages[0]
+      seasons: [],
+      loading: true,
+      totalSeasons: 0,
+      yearFilter: undefined
     };
-    _this.setChosenPage = _this.setChosenPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.getChosenPage = _this.getChosenPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.fetchSeasons = _this.fetchSeasons.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
-  _createClass(App, [{
-    key: "setChosenPage",
-    value: function setChosenPage(targetPage) {
+  _createClass(SeasonList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchSeasons(1, 25);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
       this.setState({
-        activeComponent: targetPage
+        seasons: []
       });
     }
   }, {
-    key: "getChosenPage",
-    value: function getChosenPage() {
-      if (this.state.activeComponent === 'Home') {
-        return React.createElement(Home, null);
-      } else if (this.state.activeComponent === 'Seasons') {
-        return React.createElement(Seasons, null);
-      } else if (this.state.activeComponent === 'Teams') {
-        return React.createElement(Teams, null);
-      } else if (this.state.activeComponent === 'Drivers') {
-        return React.createElement(Drivers, null);
-      } else if (this.state.activeComponent === 'Tracks') {
-        return React.createElement(Tracks, null);
-      }
+    key: "fetchSeasons",
+    value: function fetchSeasons(targetPage, targetPageSize) {
+      var _this2 = this;
+
+      this.setState({
+        loading: true
+      });
+      var safePageSize = targetPageSize;
+      var safePage = targetPage;
+      var apiReq = new ApiRequest('seasons', safePageSize, safePage);
+      apiReq.send().then(function (seasonsResponse) {
+        console.log('Seasons response:', seasonsResponse);
+
+        _this2.setState({
+          seasons: seasonsResponse.MRData.SeasonTable.Seasons,
+          totalSeasons: parseInt(seasonsResponse.MRData.total, 10),
+          loading: false
+        });
+      }).catch(function (err) {
+        console.error('Error while getting all seasons:', err);
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var activePage = this.getChosenPage();
       return React.createElement("div", {
-        id: "componentContainer"
-      }, React.createElement(Navbar, {
-        activeComponent: this.state.activeComponent,
-        onPageChange: this.setChosenPage,
-        pages: pages
-      }), activePage, React.createElement(Footer, null));
+        id: "seasonsList"
+      }, React.createElement("section", {
+        id: "headerRow"
+      }, React.createElement("input", {
+        type: "text",
+        value: this.state.yearFilter,
+        placeholder: "Search for a year",
+        disabled: this.state.loading
+      }), this.state.totalSeasons > 0 && React.createElement(Paginator, {
+        totalItems: this.state.totalSeasons,
+        fetchSeasons: this.fetchSeasons,
+        isDisabled: this.state.loading
+      })));
     }
   }]);
 
-  return App;
+  return SeasonList;
 }(React.Component);
-
-ReactDOM.render(React.createElement(App, null), appContainer);

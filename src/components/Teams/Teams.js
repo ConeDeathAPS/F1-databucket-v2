@@ -1,4 +1,4 @@
-class HomePage extends React.Component {
+class Teams extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -6,7 +6,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<main>
-				<h2>Home</h2>
+				<h2>Teams</h2>
 			</main>
 		);
 	}

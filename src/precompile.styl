@@ -103,6 +103,7 @@ nav
 			background-color: secondary(1)
 
 main
+	box-sizing: border-box
 	width: 100%
 	display: flex
 	flex: 1
@@ -110,6 +111,7 @@ main
 	justify-content: start
 	align-items: center
 	overflow: auto
+	padding: 20px 10px
 	
 footer
 	p
@@ -125,6 +127,8 @@ button
 	color: black
 	cursor: pointer
 	background: transparent
+	&.icon-button
+		padding: 0px 2px
 	&.outline
 		border: 1px solid primary(1)
 	&:focus
@@ -165,3 +169,29 @@ input, textarea
 		outline: none
 		border: 1px solid secondary(1)
 		box-shadow: 0px 0px 3px 1px secondary(1) 
+		
+#pagination
+	box-sizing: border-box
+	display: flex
+	flex-direction: row
+	justify-content: end
+	align-items: center
+
+#seasonsList
+	box-sizing: border-box
+	width: 50%
+	display: flex
+	flex-direction: row
+	justify-content: start
+	align-items: start
+	flex-wrap: wrap
+	#headerRow
+		display: flex
+		flex-direction: row
+		justify-content: space-between
+		align-items: center
+		width: 100%
+		box-sizing: border-box
+		margin: 5px
+		padding: 0px 0px 10px 0px
+		border-bottom: 1px solid primaryLight(1)

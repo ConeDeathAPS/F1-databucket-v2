@@ -1,4 +1,4 @@
-class DriversPage extends React.Component {
+class Home extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -6,7 +6,7 @@ class DriversPage extends React.Component {
 	render() {
 		return (
 			<main>
-				<h2>Drivers</h2>
+				<h2>Home</h2>
 			</main>
 		);
 	}

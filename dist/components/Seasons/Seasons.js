@@ -10,73 +10,48 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-var appContainer = document.getElementById('appComponent');
-var pages = ['Home', 'Seasons', 'Teams', 'Drivers', 'Tracks'];
-
-var App =
+var Seasons =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(App, _React$Component);
+  _inherits(Seasons, _React$Component);
 
-  function App(props) {
+  function Seasons(props) {
     var _this;
 
-    _classCallCheck(this, App);
+    _classCallCheck(this, Seasons);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Seasons).call(this, props));
     _this.state = {
-      activeComponent: pages[0]
+      loadingState: false,
+      // If true, we are loading data from the API
+      currentPage: 1,
+      // The current page of seasons
+      pageSize: 25,
+      // The size of the page
+      totalSeasons: 0,
+      // The total number of seasons available
+      seasons: [],
+      // The currently viewed array of seasons
+      disallowNextPage: true,
+      disallowPreviousPage: false
     };
-    _this.setChosenPage = _this.setChosenPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.getChosenPage = _this.getChosenPage.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
-  _createClass(App, [{
-    key: "setChosenPage",
-    value: function setChosenPage(targetPage) {
-      this.setState({
-        activeComponent: targetPage
-      });
-    }
-  }, {
-    key: "getChosenPage",
-    value: function getChosenPage() {
-      if (this.state.activeComponent === 'Home') {
-        return React.createElement(Home, null);
-      } else if (this.state.activeComponent === 'Seasons') {
-        return React.createElement(Seasons, null);
-      } else if (this.state.activeComponent === 'Teams') {
-        return React.createElement(Teams, null);
-      } else if (this.state.activeComponent === 'Drivers') {
-        return React.createElement(Drivers, null);
-      } else if (this.state.activeComponent === 'Tracks') {
-        return React.createElement(Tracks, null);
-      }
-    }
-  }, {
+  _createClass(Seasons, [{
     key: "render",
     value: function render() {
-      var activePage = this.getChosenPage();
-      return React.createElement("div", {
-        id: "componentContainer"
-      }, React.createElement(Navbar, {
-        activeComponent: this.state.activeComponent,
-        onPageChange: this.setChosenPage,
-        pages: pages
-      }), activePage, React.createElement(Footer, null));
+      return React.createElement("main", null, React.createElement(SeasonList, null));
     }
   }]);
 
-  return App;
+  return Seasons;
 }(React.Component);
-
-ReactDOM.render(React.createElement(App, null), appContainer);

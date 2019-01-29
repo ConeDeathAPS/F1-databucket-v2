@@ -1,4 +1,4 @@
-class TeamsPage extends React.Component {
+class Tracks extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -6,7 +6,7 @@ class TeamsPage extends React.Component {
 	render() {
 		return (
 			<main>
-				<h2>Teams</h2>
+				<h2>Tracks</h2>
 			</main>
 		);
 	}

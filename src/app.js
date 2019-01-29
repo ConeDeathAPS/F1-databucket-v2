@@ -18,15 +18,15 @@ class App extends React.Component {
 
 	getChosenPage() {
 		if (this.state.activeComponent === 'Home') {
-			return <HomePage />
+			return <Home />
 		} else if (this.state.activeComponent === 'Seasons') {
-			return <SeasonsPage />
+			return <Seasons />
 		} else if (this.state.activeComponent === 'Teams') {
-			return <TeamsPage />
+			return <Teams />
 		} else if (this.state.activeComponent === 'Drivers') {
-			return <DriversPage />
+			return <Drivers />
 		} else if (this.state.activeComponent === 'Tracks') {
-			return <TracksPage />
+			return <Tracks />
 		}		
 	}
 
@@ -35,7 +35,7 @@ class App extends React.Component {
 		return (
 			<div id="componentContainer">
 				<Navbar activeComponent={this.state.activeComponent} onPageChange={this.setChosenPage} pages={pages}/>
-				{activePage}
+					{activePage}
 				<Footer />
 			</div>
 		);	
