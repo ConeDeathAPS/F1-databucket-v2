@@ -2,20 +2,48 @@ class Seasons extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			loadingState: false, // If true, we are loading data from the API
-			currentPage: 1, // The current page of seasons
-			pageSize: 25, // The size of the page
-			totalSeasons: 0, // The total number of seasons available
-			seasons: [], // The currently viewed array of seasons
-			disallowNextPage: true,
-			disallowPreviousPage: false,
+			season: undefined,
+			activeSeason: undefined,
 		};
+		this.onSeasonSelect = this.onSeasonSelect.bind(this);
+		this.fetchSeasonData = this.fetchSeasonData.bind(this);
+	}
+
+	onSeasonSelect(season) {
+		this.setState({
+			season: season
+		}, () => {
+			this.fetchSeasonData();
+		});
+	}
+
+	fetchSeasonData() {
+		this.setState({
+			loading: true,
+		});
+		if (isNaN(this.state.season) || this.state.season.length !== 4) {
+			console.error(`Invalid season "${this.state.season}". Must be a 4 digit year.`);
+			return Promise.reject(`Invalid season "${this.state.season}". Must be a 4 digit year.`);
+		}
+		const apiReq = new ApiRequest(this.state.season);
+		apiReq.send()
+		.then((seasonResponse) => {
+			console.log('Season response:', seasonResponse);
+			this.setState({
+				activeSeason: seasonResponse.MRData.RaceTable.Races,
+				loading: false,
+			});
+		})
+		.catch((err) => {
+			console.error('Error while getting all seasons:', err);
+		});
 	}
 
 	render() {
 		return (
 			<main>
-				<SeasonList />
+				<SeasonList onSeasonSelect={this.onSeasonSelect} />
+				<SeasonDetail activeSeason={this.state.activeSeason} />
 			</main>
 		)
 	}

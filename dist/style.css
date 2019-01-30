@@ -100,7 +100,7 @@ footer p {
 footer p a {
   color: #62efff;
 }
-button {
+button:enabled {
   padding: 4px 12px;
   margin: 0px 5px;
   border-radius: 4px;
@@ -109,62 +109,100 @@ button {
   cursor: pointer;
   background: transparent;
 }
-button.icon-button {
+button:enabled.icon-button {
   padding: 0px 2px;
 }
-button.outline {
+button:enabled.outline {
   border: 1px solid #263238;
 }
-button:focus {
+button:enabled:focus {
   outline: none;
 }
-button.primary {
+button:enabled.primary {
   color: #000a12;
 }
-button.primary.raised {
-  background-color: #263238;
-  color: #fff;
-}
-button.primary.raised:hover {
-  background-color: rgba(38,50,56,0.85);
-}
-button.primary.raised:active {
-  background-color: rgba(38,50,56,0.92);
-}
-button.primary:hover {
+button:enabled.primary:hover {
   background-color: rgba(38,50,56,0.15);
 }
-button.primary:active {
+button:enabled.primary:active {
   background-color: rgba(38,50,56,0.08);
 }
-button.secondary {
+button:enabled.primary.raised {
+  background-color: #263238;
+  color: #fff;
+  box-shadow: 0px 2px 2px 1px #4f5b62;
+}
+button:enabled.primary.raised:hover {
+  background-color: rgba(38,50,56,0.85);
+}
+button:enabled.primary.raised:active {
+  background-color: rgba(38,50,56,0.92);
+}
+button:enabled.secondary {
   color: #008ba3;
 }
-button.secondary.raised {
-  background-color: #00bcd4;
-  color: #fff;
-}
-button.secondary.raised:hover {
-  background-color: rgba(0,188,212,0.85);
-}
-button.secondary.raised:active {
-  background-color: rgba(0,188,212,0.92);
-}
-button.secondary:hover {
+button:enabled.secondary:hover {
   background-color: rgba(0,188,212,0.15);
 }
-button.secondary:active {
+button:enabled.secondary:active {
   background-color: rgba(0,188,212,0.08);
 }
+button:enabled.secondary:disabled {
+  color: rgba(0,0,0,0.5);
+}
+button:enabled.secondary.raised {
+  background-color: #00bcd4;
+  color: #fff;
+  box-shadow: 0px 2px 2px 1px #62efff;
+}
+button:enabled.secondary.raised:hover {
+  background-color: rgba(0,188,212,0.85);
+}
+button:enabled.secondary.raised:active {
+  background-color: rgba(0,188,212,0.92);
+}
+button:enabled.secondary.raised:disabled {
+  color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.16);
+}
+button:disabled {
+  padding: 4px 12px;
+  margin: 0px 5px;
+  border-radius: 4px;
+  border: none;
+  color: #000;
+  cursor: auto;
+  background: transparent;
+}
+button:disabled.icon-button {
+  padding: 0px 2px;
+}
+button:disabled.outline {
+  border: 1px solid #263238;
+}
+button:disabled:focus {
+  outline: none;
+}
+button:disabled.primary,
+button:disabled.secondary {
+  color: rgba(0,0,0,0.5);
+}
+button:disabled.primary.raised,
+button:disabled.secondary.raised {
+  color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.16);
+}
 input,
-textarea {
+textarea,
+select {
   font-size: 18px;
   padding: 3px 5px;
   border: 1px solid #263238;
   border-radius: 4px;
 }
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   outline: none;
   border: 1px solid #00bcd4;
   box-shadow: 0px 0px 3px 1px #00bcd4;
@@ -178,7 +216,7 @@ textarea:focus {
 }
 #seasonsList {
   box-sizing: border-box;
-  width: 50%;
+  width: 33%;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -195,4 +233,12 @@ textarea:focus {
   margin: 5px;
   padding: 0px 0px 10px 0px;
   border-bottom: 1px solid #4f5b62;
+}
+#seasonsList #seasonsPage {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
 }

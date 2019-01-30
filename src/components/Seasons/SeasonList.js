@@ -25,7 +25,7 @@ class SeasonList extends React.Component {
 			loading: true,
 		});
 		const safePageSize = targetPageSize;
-		const safePage = targetPage;
+		const safePage = (targetPage - 1) * safePageSize;
 		const apiReq = new ApiRequest('seasons', safePageSize, safePage);
 		apiReq.send()
 		.then((seasonsResponse) => {
@@ -42,6 +42,9 @@ class SeasonList extends React.Component {
 	}
 
 	render() {
+		const years = this.state.seasons.map(s => (
+			<button className="primary" href={s.url} key={s.season} onClick={() => { this.props.onSeasonSelect(s.season) }}>{s.season}</button>
+		));
 		return (
 			<div id="seasonsList">
 				<section id="headerRow">
@@ -50,7 +53,9 @@ class SeasonList extends React.Component {
 						<Paginator totalItems={this.state.totalSeasons} fetchSeasons={this.fetchSeasons} isDisabled={this.state.loading} />
 					}				
 				</section>
-
+				<section id="seasonsPage">
+					{years}
+				</section>
 			</div>
 		);
 	}

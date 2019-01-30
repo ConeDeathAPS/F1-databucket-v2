@@ -63,7 +63,7 @@ class Paginator extends React.Component {
 
 	render() {
 		const allPages = this.state.allPages.map(page => (
-			<button className="secondary" onClick={this.goToPage} disabled={this.state.pageNumber === page} key={page}>
+			<button className="secondary" onClick={() => {this.goToPage(page)}} disabled={this.state.pageNumber === page} key={page}>
 				{page}
 			</button>
 		));

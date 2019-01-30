@@ -108,7 +108,9 @@ function (_React$Component) {
       var allPages = this.state.allPages.map(function (page) {
         return React.createElement("button", {
           className: "secondary",
-          onClick: _this3.goToPage,
+          onClick: function onClick() {
+            _this3.goToPage(page);
+          },
           disabled: _this3.state.pageNumber === page,
           key: page
         }, page);

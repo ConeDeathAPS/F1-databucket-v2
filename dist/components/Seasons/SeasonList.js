@@ -60,7 +60,7 @@ function (_React$Component) {
         loading: true
       });
       var safePageSize = targetPageSize;
-      var safePage = targetPage;
+      var safePage = (targetPage - 1) * safePageSize;
       var apiReq = new ApiRequest('seasons', safePageSize, safePage);
       apiReq.send().then(function (seasonsResponse) {
         console.log('Seasons response:', seasonsResponse);
@@ -77,6 +77,18 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
+      var years = this.state.seasons.map(function (s) {
+        return React.createElement("button", {
+          className: "primary",
+          href: s.url,
+          key: s.season,
+          onClick: function onClick() {
+            _this3.props.onSeasonSelect(s.season);
+          }
+        }, s.season);
+      });
       return React.createElement("div", {
         id: "seasonsList"
       }, React.createElement("section", {
@@ -90,7 +102,9 @@ function (_React$Component) {
         totalItems: this.state.totalSeasons,
         fetchSeasons: this.fetchSeasons,
         isDisabled: this.state.loading
-      })));
+      })), React.createElement("section", {
+        id: "seasonsPage"
+      }, years));
     }
   }]);
 
