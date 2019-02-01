@@ -30,7 +30,7 @@ class Seasons extends React.Component {
 		.then((seasonResponse) => {
 			console.log('Season response:', seasonResponse);
 			this.setState({
-				activeSeason: seasonResponse.MRData.RaceTable.Races,
+				activeSeason: seasonResponse.MRData.RaceTable,
 				loading: false,
 			});
 		})
@@ -41,7 +41,7 @@ class Seasons extends React.Component {
 
 	render() {
 		return (
-			<main>
+			<main id="seasons">
 				<SeasonList onSeasonSelect={this.onSeasonSelect} />
 				<SeasonDetail activeSeason={this.state.activeSeason} />
 			</main>

@@ -130,7 +130,7 @@ button:enabled.primary:active {
 button:enabled.primary.raised {
   background-color: #263238;
   color: #fff;
-  box-shadow: 0px 2px 2px 1px #4f5b62;
+  box-shadow: 0px 2px 2px -1px #4f5b62;
 }
 button:enabled.primary.raised:hover {
   background-color: rgba(38,50,56,0.85);
@@ -153,7 +153,7 @@ button:enabled.secondary:disabled {
 button:enabled.secondary.raised {
   background-color: #00bcd4;
   color: #fff;
-  box-shadow: 0px 2px 2px 1px #62efff;
+  box-shadow: 0px 2px 2px -1px #62efff;
 }
 button:enabled.secondary.raised:hover {
   background-color: rgba(0,188,212,0.85);
@@ -214,16 +214,22 @@ select:focus {
   justify-content: end;
   align-items: center;
 }
-#seasonsList {
+main#seasons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+main#seasons #seasonsList {
   box-sizing: border-box;
-  width: 33%;
+  width: 30%;
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: start;
   flex-wrap: wrap;
 }
-#seasonsList #headerRow {
+main#seasons #seasonsList #headerRow {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -234,11 +240,35 @@ select:focus {
   padding: 0px 0px 10px 0px;
   border-bottom: 1px solid #4f5b62;
 }
-#seasonsList #seasonsPage {
+main#seasons #seasonsList #seasonsPage {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
   width: 100%;
+}
+main#seasons #seasonDetail {
+  box-sizing: border-box;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+}
+main#seasons #seasonDetail h2 {
+  display: block;
+  text-align: center;
+}
+main#seasons #seasonDetail #seasonRoundsList .raceRow {
+  width: 100%;
+  box-sixing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+main#seasons #seasonDetail #seasonRoundsList .raceRow p {
+  display: inline-block;
 }

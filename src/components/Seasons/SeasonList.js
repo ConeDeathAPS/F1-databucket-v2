@@ -6,6 +6,7 @@ class SeasonList extends React.Component {
 			loading: true,
 			totalSeasons: 0,
 			yearFilter: undefined,
+			activeSeason: undefined,
 		};
 		this.fetchSeasons = this.fetchSeasons.bind(this);
 	}
@@ -17,6 +18,12 @@ class SeasonList extends React.Component {
 	componentWillUnmount() {
 		this.setState({
 			seasons: [],
+		});
+	}
+
+	setActiveSeason(season) {
+		this.setState({
+			activeSeason: season,
 		});
 	}
 
@@ -43,7 +50,13 @@ class SeasonList extends React.Component {
 
 	render() {
 		const years = this.state.seasons.map(s => (
-			<button className="primary" href={s.url} key={s.season} onClick={() => { this.props.onSeasonSelect(s.season) }}>{s.season}</button>
+			<button 
+				className={s.season === this.state.activeSeason ? 'primary raised' : 'primary'} 
+				href={s.url} 
+				key={s.season} 
+				onClick={() => { this.props.onSeasonSelect(s.season); this.setActiveSeason(s.season); }}>
+				{s.season}
+			</button>
 		));
 		return (
 			<div id="seasonsList">

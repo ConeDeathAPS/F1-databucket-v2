@@ -33,7 +33,8 @@ function (_React$Component) {
       seasons: [],
       loading: true,
       totalSeasons: 0,
-      yearFilter: undefined
+      yearFilter: undefined,
+      activeSeason: undefined
     };
     _this.fetchSeasons = _this.fetchSeasons.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
@@ -49,6 +50,13 @@ function (_React$Component) {
     value: function componentWillUnmount() {
       this.setState({
         seasons: []
+      });
+    }
+  }, {
+    key: "setActiveSeason",
+    value: function setActiveSeason(season) {
+      this.setState({
+        activeSeason: season
       });
     }
   }, {
@@ -81,11 +89,13 @@ function (_React$Component) {
 
       var years = this.state.seasons.map(function (s) {
         return React.createElement("button", {
-          className: "primary",
+          className: s.season === _this3.state.activeSeason ? 'primary raised' : 'primary',
           href: s.url,
           key: s.season,
           onClick: function onClick() {
             _this3.props.onSeasonSelect(s.season);
+
+            _this3.setActiveSeason(s.season);
           }
         }, s.season);
       });

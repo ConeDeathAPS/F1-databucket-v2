@@ -24,23 +24,35 @@ function (_React$Component) {
   _inherits(SeasonDetail, _React$Component);
 
   function SeasonDetail(props) {
-    var _this;
-
     _classCallCheck(this, SeasonDetail);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SeasonDetail).call(this, props));
-    _this.state = {
-      activeSeason: _this.props.activeSeason
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(SeasonDetail).call(this, props));
   }
 
   _createClass(SeasonDetail, [{
     key: "render",
     value: function render() {
+      console.log('this.props.season:', this.props.activeSeason);
+      var races;
+
+      if (this.props.activeSeason) {
+        races = this.props.activeSeason.Races.map(function (race) {
+          return React.createElement("article", {
+            className: "raceRow",
+            id: "".concat(race.season, "-").concat(race.round),
+            key: race.round
+          }, React.createElement("p", null, React.createElement("b", null, "Round ", race.round), "\xA0-\xA0"), React.createElement("a", {
+            href: race.url,
+            target: "_blank"
+          }, race.raceName));
+        });
+      }
+
       return React.createElement("div", {
         id: "seasonDetail"
-      }, this.state.activeSeason ? React.createElement("p", null, "Have season!") : React.createElement("p", null, "Dont have season!"));
+      }, this.props.activeSeason ? React.createElement(React.Fragment, null, React.createElement("h2", null, this.props.activeSeason.season), React.createElement("section", {
+        id: "seasonRoundsList"
+      }, races)) : React.createElement("h2", null, "Dont have season!"));
     }
   }]);
 

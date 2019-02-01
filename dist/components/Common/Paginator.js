@@ -71,9 +71,11 @@ function (_React$Component) {
     }
   }, {
     key: "goToPage",
-    value: function goToPage(e) {
-      console.log("event:", e.target);
-      this.props.fetchSeasons(this.state.pageNumber, this.state.pageSize);
+    value: function goToPage(page) {
+      this.props.fetchSeasons(page, this.state.pageSize);
+      this.setState({
+        pageNumber: page
+      });
     }
   }, {
     key: "onPageSizeChanged",
@@ -93,12 +95,20 @@ function (_React$Component) {
     value: function onNextPage(e) {
       if (!this.state.allPages[this.state.pageNumber]) e.preventDefault();
       this.props.fetchSeasons(this.state.pageNumber + 1, this.state.pageSize);
+      var currentPage = this.state.pageNumber;
+      this.setState({
+        pageNumber: currentPage + 1
+      });
     }
   }, {
     key: "onPreviousPage",
     value: function onPreviousPage(e) {
       if (this.state.pageNumber === 1) e.preventDefault();
       this.props.fetchSeasons(this.state.pageNumber - 1, this.state.pageSize);
+      var currentPage = this.state.pageNumber;
+      this.setState({
+        pageNumber: currentPage - 1
+      });
     }
   }, {
     key: "render",

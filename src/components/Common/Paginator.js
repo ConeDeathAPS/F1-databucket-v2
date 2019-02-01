@@ -37,9 +37,11 @@ class Paginator extends React.Component {
 		});
 	}
 
-	goToPage(e) {
-		console.log("event:", e.target);
-		this.props.fetchSeasons(this.state.pageNumber, this.state.pageSize);
+	goToPage(page) {
+		this.props.fetchSeasons(page, this.state.pageSize);
+		this.setState({
+			pageNumber: page,
+		});
 	}
 
 	onPageSizeChanged(e) {
@@ -54,11 +56,19 @@ class Paginator extends React.Component {
 	onNextPage(e) {
 		if (!this.state.allPages[this.state.pageNumber]) e.preventDefault();
 		this.props.fetchSeasons(this.state.pageNumber + 1, this.state.pageSize);
+		const currentPage = this.state.pageNumber;
+		this.setState({
+			pageNumber: currentPage + 1,
+		});
 	}
 
 	onPreviousPage(e) {
 		if (this.state.pageNumber === 1) e.preventDefault();
 		this.props.fetchSeasons(this.state.pageNumber - 1, this.state.pageSize);
+		const currentPage = this.state.pageNumber;
+		this.setState({
+			pageNumber: currentPage - 1,
+		});
 	}
 
 	render() {

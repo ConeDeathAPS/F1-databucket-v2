@@ -68,7 +68,7 @@ function (_React$Component) {
         console.log('Season response:', seasonResponse);
 
         _this3.setState({
-          activeSeason: seasonResponse.MRData.RaceTable.Races,
+          activeSeason: seasonResponse.MRData.RaceTable,
           loading: false
         });
       }).catch(function (err) {
@@ -78,7 +78,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return React.createElement("main", null, React.createElement(SeasonList, {
+      return React.createElement("main", {
+        id: "seasons"
+      }, React.createElement(SeasonList, {
         onSeasonSelect: this.onSeasonSelect
       }), React.createElement(SeasonDetail, {
         activeSeason: this.state.activeSeason
