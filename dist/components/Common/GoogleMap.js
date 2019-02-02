@@ -18,75 +18,65 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var SeasonDetail =
+var GoogleMap =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(SeasonDetail, _React$Component);
+  _inherits(GoogleMap, _React$Component);
 
-  function SeasonDetail(props) {
+  function GoogleMap(props) {
     var _this;
 
-    _classCallCheck(this, SeasonDetail);
+    _classCallCheck(this, GoogleMap);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SeasonDetail).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(GoogleMap).call(this, props));
     _this.state = {
-      race: undefined
+      location: {
+        center: {
+          lat: undefined,
+          lng: undefined
+        },
+        zoom: 13
+      }
     };
     return _this;
   }
 
-  _createClass(SeasonDetail, [{
-    key: "onRaceSelected",
-    value: function onRaceSelected(e, r) {
-      if (this.state.race && this.state.race.round === r.round) e.preventDefault();
-      console.log('Selecting race:', r);
+  _createClass(GoogleMap, [{
+    key: "onMapInit",
+    value: function onMapInit() {
+      if (!this.props.mapProps) {
+        console.error('Invalid map properties found:', this.props.mapProps);
+        return false;
+      }
+
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: this.state.race.Circuit.Location.lat,
+          lng: this.state.race.Circuit.Location.long
+        },
+        zoom: 12
+      });
+    }
+  }, {
+    key: "onMapLocationChange",
+    value: function onMapLocationChange(locObj) {
+      if (!locObj.center || !locObj.center.lat || !locObj.center.lng || !locObj.zoom) {
+        console.error('Invalid locationObject provided');
+        return false;
+      }
+
       this.setState({
-        race: r
+        location: locObj
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      console.log('this.props.season:', this.props.activeSeason);
-      var races;
-      var selectedRaceLocation;
-
-      if (this.props.activeSeason) {
-        races = this.props.activeSeason.Races.map(function (race) {
-          return React.createElement("button", {
-            className: "secondary ".concat(_this2.state.race && _this2.state.race.round === race.round ? 'raised' : ''),
-            id: "".concat(race.season, "-").concat(race.round),
-            key: race.round,
-            onClick: function onClick(e) {
-              _this2.onRaceSelected(e, race);
-            }
-          }, race.raceName);
-        });
-      }
-
-      if (this.state.race) {
-        selectedRaceLocation = {
-          lat: parseInt(this.state.race.Circuit.Location.lat, 10),
-          lng: parseInt(this.state.race.Circuit.Location.long, 10)
-        };
-      }
-
       return React.createElement("div", {
-        id: "seasonDetail"
-      }, this.props.activeSeason ? React.createElement(React.Fragment, null, React.createElement("h2", null, this.props.activeSeason.season), React.createElement("div", {
-        id: "seasonDetailMainRow"
-      }, React.createElement("section", {
-        id: "seasonRoundsList"
-      }, races), this.state.race ? React.createElement(GoogleMap, {
-        location: {
-          center: selectedRaceLocation,
-          zoom: 13
-        }
-      }) : React.createElement("h3", null, "Select a race!"))) : React.createElement("h2", null, "Pick a season!"));
+        id: "gMap"
+      });
     }
   }]);
 
-  return SeasonDetail;
+  return GoogleMap;
 }(React.Component);
