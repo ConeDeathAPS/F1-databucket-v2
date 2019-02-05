@@ -1,0 +1,277 @@
+/* Color variable initialization
+
+Primary Dark - rgba(0,10,18,1)
+Primary - rgba(38,50,56, 1)
+Primary Light - rgba(79,91,98,1)
+Secondary Dark - rgba(0,139,163,1)
+Secondary - rgba(0,188,212,1)
+Secondary Light - rgba(98,239,255,1)
+
+*/
+
+primaryDark(opacity)
+	if opacity is a 'unit'
+		return rgba(0,10,18,opacity)
+	else
+		error('Opacity was not provided as a valid number')
+		
+primary(opacity)
+	if opacity is a 'unit'
+		return rgba(38,50,56,opacity)
+	else
+		error('Opacity was not provided as a valid number')
+		
+primaryLight(opacity)
+	if opacity is a 'unit'
+		return rgba(79,91,98,opacity)
+	else
+		error('Opacity was not provided as a valid number')
+		
+secondaryDark(opacity)
+	if opacity is a 'unit'
+		return rgba(0,139,163,opacity)
+	else
+		error('Opacity was not provided as a valid number')
+		
+secondary(opacity)
+	if opacity is a 'unit'
+		return rgba(0,188,212,opacity)
+	else
+		error('Opacity was not provided as a valid number')
+		
+secondaryLight(opacity)
+	if opacity is a 'unit'
+		return rgba(98,239,255,opacity)
+	else
+		error('Opacity was not provided as a valid number')
+		
+
+body, html, #appComponent, #componentContainer
+	margin: 0px
+	padding: 0px
+	height: 100%
+	width: 100%
+body, #appComponent, #componentContainer
+	display: flex
+	flex-direction: column
+	justify-content: start
+	align-items: center
+	min-width: 100%
+
+h1, h2, h3, button
+	font-family: 'Comfortaa'
+	margin: 0px
+
+p, a, span, label, li, input, textarea, h4, h5
+	margin: 0px
+	font-family: 'Yrsa'
+
+
+
+nav, footer
+	width: 100%
+	box-sizing: border-box
+	background-color: primary(1)
+	color: white
+	display: flex
+	flex-direction: row
+	justify-content: space-around
+	align-items: stretch
+	
+nav
+	h2
+		margin: 10px 0px
+	section
+		width: 20%
+		display: flex
+		flex-direction: row
+		justify-content: center
+		align-items: stretch
+		a
+			box-sizing: border-box
+			height: 100%
+			padding: 0px 10px
+			color: white
+			text-decoration: none
+			font-size: 1.3em
+			display: flex
+			flex-direction: column
+			justify-content: center
+		a:hover
+			background-color: primaryLight(1)
+		a.active
+			background-color: secondary(1)
+
+main
+	box-sizing: border-box
+	width: 100%
+	display: flex
+	flex: 1
+	flex-direction: row
+	justify-content: center
+	align-content: start
+	align-items: start
+	overflow: auto
+	padding: 20px 10px
+	
+footer
+	p
+		margin: 10px 0px
+		a
+			color: secondaryLight(1)
+
+button:enabled
+	padding: 4px 12px
+	margin: 0px 5px
+	border-radius: 4px
+	border: none
+	color: black
+	cursor: pointer
+	background: transparent
+	&.icon-button
+		padding: 0px 2px
+	&.outline
+		border: 1px solid primary(1)
+	&:focus
+		outline: none
+	&.primary
+		color: primaryDark(1)
+		&:hover
+			background-color: primary(.15)
+		&:active
+			background-color: primary(.08)
+
+		&.raised
+			background-color: primary(1)
+			color: white
+			box-shadow: 0px 2px 2px -1px primaryLight(1)
+			&:hover
+				background-color: primary(.85)
+			&:active
+				background-color: primary(.92)
+
+	&.secondary
+		color: secondaryDark(1)
+		&:hover
+			background-color: secondary(.15)
+		&:active
+			background-color: secondary(.08)
+		&:disabled
+			color: rgba(0, 0, 0, .5)	
+		&.raised
+			background-color: secondary(1)
+			color: white
+			box-shadow: 0px 2px 2px -1px secondaryLight(1)
+			&:hover
+				background-color: secondary(.85)
+			&:active
+				background-color: secondary(.92)
+			&:disabled
+				color: rgba(0, 0, 0, .5)
+				background-color: rgba(0, 0, 0, .16)
+
+button:disabled
+	padding: 4px 12px
+	margin: 0px 5px
+	border-radius: 4px
+	border: none
+	color: black
+	cursor: auto
+	background: transparent
+	&.icon-button
+		padding: 0px 2px
+	&.outline
+		border: 1px solid primary(1)
+	&:focus
+		outline: none
+	&.primary, &.secondary
+		color: rgba(0, 0, 0, .5)
+		&.raised
+			color: rgba(0, 0, 0, .5)
+			background-color: rgba(0, 0, 0, .16)
+				
+input, textarea, select
+	font-size: 18px
+	padding: 3px 5px
+	border: 1px solid primary(1)
+	border-radius: 4px
+	&:focus
+		outline: none
+		border: 1px solid secondary(1)
+		box-shadow: 0px 0px 3px 1px secondary(1) 
+		
+
+#pagination
+	box-sizing: border-box
+	display: flex
+	flex-direction: row
+	justify-content: end
+	align-items: center
+
+main#seasons
+	flex-wrap: wrap
+	height: 100%
+	#seasonsList
+		box-sizing: border-box
+		width: 30%
+		display: flex
+		flex-direction: row
+		justify-content: start
+		align-items: start
+		flex-wrap: wrap
+		#headerRow
+			display: flex
+			flex-direction: row
+			justify-content: space-between
+			align-items: center
+			width: 100%
+			box-sizing: border-box
+			margin: 5px
+			padding: 0px 0px 10px 0px
+			border-bottom: 1px solid primaryLight(1)
+		#seasonsPage
+			box-sizing: border-box
+			display: flex
+			flex-direction: column
+			justify-content: start
+			align-items: start
+			flex-wrap: wrap
+			width: 100%
+	#seasonDetail
+		box-sizing: border-box
+		width: 60%
+		display: flex
+		flex-direction: column
+		justify-content: start
+		align-items: center
+		margin-left: 15px
+		#seasonDetailMainRow
+			display: flex
+			width: 100%
+			box-sizing: border-box
+			flex-direction: row
+			justify-content: space-between
+			align-items: top
+			min-height: 500px
+			padding-top: 15px
+			#seasonRoundsList
+				display: flex
+				width: 40%
+				flex-direction: column
+				justify-content: start
+				align-items: start
+				button
+					font-size: 1.4em
+			#raceMapContainer
+				height: 100%
+				width: 50%
+				display: flex
+				flex-direction: row
+				justify-content: center
+				align-items: center
+				#gMap
+					height: 500px
+					width: 100%
+				
+				
+

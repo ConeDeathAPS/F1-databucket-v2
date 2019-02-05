@@ -1,0 +1,291 @@
+/* Color variable initialization
+
+Primary Dark - rgba(0,10,18,1)
+Primary - rgba(38,50,56, 1)
+Primary Light - rgba(79,91,98,1)
+Secondary Dark - rgba(0,139,163,1)
+Secondary - rgba(0,188,212,1)
+Secondary Light - rgba(98,239,255,1)
+
+*/
+body,
+html,
+#appComponent,
+#componentContainer {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+body,
+#appComponent,
+#componentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  min-width: 100%;
+}
+h1,
+h2,
+h3,
+button {
+  font-family: 'Comfortaa';
+  margin: 0px;
+}
+p,
+a,
+span,
+label,
+li,
+input,
+textarea,
+h4,
+h5 {
+  margin: 0px;
+  font-family: 'Yrsa';
+}
+nav,
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #263238;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: stretch;
+}
+nav h2 {
+  margin: 10px 0px;
+}
+nav section {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
+nav section a {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0px 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+nav section a:hover {
+  background-color: #4f5b62;
+}
+nav section a.active {
+  background-color: #00bcd4;
+}
+main {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-content: start;
+  align-items: start;
+  overflow: auto;
+  padding: 20px 10px;
+}
+footer p {
+  margin: 10px 0px;
+}
+footer p a {
+  color: #62efff;
+}
+button:enabled {
+  padding: 4px 12px;
+  margin: 0px 5px;
+  border-radius: 4px;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  background: transparent;
+}
+button:enabled.icon-button {
+  padding: 0px 2px;
+}
+button:enabled.outline {
+  border: 1px solid #263238;
+}
+button:enabled:focus {
+  outline: none;
+}
+button:enabled.primary {
+  color: #000a12;
+}
+button:enabled.primary:hover {
+  background-color: rgba(38,50,56,0.15);
+}
+button:enabled.primary:active {
+  background-color: rgba(38,50,56,0.08);
+}
+button:enabled.primary.raised {
+  background-color: #263238;
+  color: #fff;
+  box-shadow: 0px 2px 2px -1px #4f5b62;
+}
+button:enabled.primary.raised:hover {
+  background-color: rgba(38,50,56,0.85);
+}
+button:enabled.primary.raised:active {
+  background-color: rgba(38,50,56,0.92);
+}
+button:enabled.secondary {
+  color: #008ba3;
+}
+button:enabled.secondary:hover {
+  background-color: rgba(0,188,212,0.15);
+}
+button:enabled.secondary:active {
+  background-color: rgba(0,188,212,0.08);
+}
+button:enabled.secondary:disabled {
+  color: rgba(0,0,0,0.5);
+}
+button:enabled.secondary.raised {
+  background-color: #00bcd4;
+  color: #fff;
+  box-shadow: 0px 2px 2px -1px #62efff;
+}
+button:enabled.secondary.raised:hover {
+  background-color: rgba(0,188,212,0.85);
+}
+button:enabled.secondary.raised:active {
+  background-color: rgba(0,188,212,0.92);
+}
+button:enabled.secondary.raised:disabled {
+  color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.16);
+}
+button:disabled {
+  padding: 4px 12px;
+  margin: 0px 5px;
+  border-radius: 4px;
+  border: none;
+  color: #000;
+  cursor: auto;
+  background: transparent;
+}
+button:disabled.icon-button {
+  padding: 0px 2px;
+}
+button:disabled.outline {
+  border: 1px solid #263238;
+}
+button:disabled:focus {
+  outline: none;
+}
+button:disabled.primary,
+button:disabled.secondary {
+  color: rgba(0,0,0,0.5);
+}
+button:disabled.primary.raised,
+button:disabled.secondary.raised {
+  color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.16);
+}
+input,
+textarea,
+select {
+  font-size: 18px;
+  padding: 3px 5px;
+  border: 1px solid #263238;
+  border-radius: 4px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border: 1px solid #00bcd4;
+  box-shadow: 0px 0px 3px 1px #00bcd4;
+}
+#pagination {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+main#seasons {
+  flex-wrap: wrap;
+  height: 100%;
+}
+main#seasons #seasonsList {
+  box-sizing: border-box;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+}
+main#seasons #seasonsList #headerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 0px 0px 10px 0px;
+  border-bottom: 1px solid #4f5b62;
+}
+main#seasons #seasonsList #seasonsPage {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+main#seasons #seasonDetail {
+  box-sizing: border-box;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  margin-left: 15px;
+}
+main#seasons #seasonDetail #seasonDetailMainRow {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: top;
+  min-height: 500px;
+  padding-top: 15px;
+}
+main#seasons #seasonDetail #seasonDetailMainRow #seasonRoundsList {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+main#seasons #seasonDetail #seasonDetailMainRow #seasonRoundsList button {
+  font-size: 1.4em;
+}
+main#seasons #seasonDetail #seasonDetailMainRow #raceMapContainer {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+main#seasons #seasonDetail #seasonDetailMainRow #raceMapContainer #gMap {
+  height: 500px;
+  width: 100%;
+}
