@@ -30,45 +30,28 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GoogleMap).call(this, props));
     _this.state = {
-      location: {
-        center: {
-          lat: undefined,
-          lng: undefined
-        },
-        zoom: 13
-      }
+      location: _this.props.location
     };
     return _this;
   }
 
   _createClass(GoogleMap, [{
-    key: "onMapInit",
-    value: function onMapInit() {
-      if (!this.props.mapProps) {
-        console.error('Invalid map properties found:', this.props.mapProps);
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (!this.state.location) {
+        console.error('Invalid map properties found:', this.state.location);
         return false;
       }
 
-      var map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-          lat: this.state.race.Circuit.Location.lat,
-          lng: this.state.race.Circuit.Location.long
-        },
-        zoom: 12
+      var map = new google.maps.Map(document.getElementById('gMap'), this.state.location);
+      var marker = new google.maps.Marker({
+        position: this.state.location.center,
+        map: map
       });
     }
   }, {
-    key: "onMapLocationChange",
-    value: function onMapLocationChange(locObj) {
-      if (!locObj.center || !locObj.center.lat || !locObj.center.lng || !locObj.zoom) {
-        console.error('Invalid locationObject provided');
-        return false;
-      }
-
-      this.setState({
-        location: locObj
-      });
-    }
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {}
   }, {
     key: "render",
     value: function render() {

@@ -24,6 +24,8 @@ class SeasonList extends React.Component {
 	setActiveSeason(season) {
 		this.setState({
 			activeSeason: season,
+		}, () => {
+			this.props.onSeasonSelect(this.state.seasons[0].season);
 		});
 	}
 
@@ -41,6 +43,12 @@ class SeasonList extends React.Component {
 				seasons: seasonsResponse.MRData.SeasonTable.Seasons,
 				totalSeasons: parseInt(seasonsResponse.MRData.total, 10),
 				loading: false,
+			}, () => {
+				if (!this.props.activeSeason) {
+					this.props.onSeasonSelect(this.state.seasons[0].season);
+					this.setActiveSeason(this.state.seasons[0].season);
+				}
+				
 			});
 		})
 		.catch((err) => {
@@ -54,7 +62,7 @@ class SeasonList extends React.Component {
 				className={s.season === this.state.activeSeason ? 'primary raised' : 'primary'} 
 				href={s.url} 
 				key={s.season} 
-				onClick={() => { this.props.onSeasonSelect(s.season); this.setActiveSeason(s.season); }}>
+				onClick={() => { this.setActiveSeason(s.season); }}>
 				{s.season}
 			</button>
 		));

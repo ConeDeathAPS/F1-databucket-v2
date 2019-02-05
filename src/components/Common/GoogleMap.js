@@ -2,32 +2,21 @@ class GoogleMap extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			location: {
-				center: {lat: undefined, lng: undefined},
-				zoom: 13,			
-			},
+			location: this.props.location,
 		};
 	}
 
-	onMapInit() {
-		if (!this.props.mapProps) {
-			console.error('Invalid map properties found:', this.props.mapProps);
+	componentDidMount() {
+		if (!this.state.location) {
+			console.error('Invalid map properties found:', this.state.location);
 			return false;
 		}
-		const map = new google.maps.Map(document.getElementById('map'), {
-			center: { lat: this.state.race.Circuit.Location.lat, lng: this.state.race.Circuit.Location.long },
-			zoom: 12,
-		});
+		const map = new google.maps.Map(document.getElementById('gMap'), this.state.location);		
+		const marker = new google.maps.Marker({ position: this.state.location.center, map, });
 	}
 
-	onMapLocationChange(locObj) {
-		if (!locObj.center || !locObj.center.lat || !locObj.center.lng || !locObj.zoom) {
-			console.error('Invalid locationObject provided');
-			return false;
-		}
-		this.setState({
-			location: locObj,
-		});
+	componentWillUnmount() {
+
 	}
 
 	render() {

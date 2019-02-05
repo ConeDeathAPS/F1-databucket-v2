@@ -8,14 +8,13 @@ class SeasonDetail extends React.Component {
 
 	onRaceSelected(e, r) {
 		if (this.state.race && this.state.race.round === r.round) e.preventDefault();
-		console.log('Selecting race:', r);
 		this.setState({
 			race: r,
 		});
 	}
 
 	render() {
-		console.log('this.props.season:', this.props.activeSeason);
+		console.log('Rendering')
 		let races;
 		let selectedRaceLocation;
 		if (this.props.activeSeason) {
@@ -31,24 +30,29 @@ class SeasonDetail extends React.Component {
 		}
 		if (this.state.race) {
 			selectedRaceLocation = {
-				lat: parseInt(this.state.race.Circuit.Location.lat, 10),
-				lng: parseInt(this.state.race.Circuit.Location.long, 10),
+				center: {
+					lat: parseFloat(this.state.race.Circuit.Location.lat),
+					lng: parseFloat(this.state.race.Circuit.Location.long),					
+				},
+				zoom: 13,
 			};
 		}
 		return (
 			<div id="seasonDetail">
 				{this.props.activeSeason ? (
 					<>
-						<h2>{this.props.activeSeason.season}</h2>
+						<h1>{this.props.activeSeason.season}</h1>
 						<div id="seasonDetailMainRow">
 							<section id="seasonRoundsList">
 								{races}
 							</section>
-							{this.state.race ? (
-								<GoogleMap location={ { center: selectedRaceLocation, zoom: 13 } } />
-							) : (
-								<h3>Select a race!</h3>
-							)}
+							<section id="raceMapContainer">
+								{this.state.race && selectedRaceLocation ? (
+									<GoogleMap location={selectedRaceLocation} />
+								) : (
+									<h3>Select a race!</h3>
+								)}								
+							</section>
 						</div>
 					</>
 				) : (

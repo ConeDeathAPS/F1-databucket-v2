@@ -55,14 +55,18 @@ function (_React$Component) {
   }, {
     key: "setActiveSeason",
     value: function setActiveSeason(season) {
+      var _this2 = this;
+
       this.setState({
         activeSeason: season
+      }, function () {
+        _this2.props.onSeasonSelect(_this2.state.seasons[0].season);
       });
     }
   }, {
     key: "fetchSeasons",
     value: function fetchSeasons(targetPage, targetPageSize) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.setState({
         loading: true
@@ -73,10 +77,16 @@ function (_React$Component) {
       apiReq.send().then(function (seasonsResponse) {
         console.log('Seasons response:', seasonsResponse);
 
-        _this2.setState({
+        _this3.setState({
           seasons: seasonsResponse.MRData.SeasonTable.Seasons,
           totalSeasons: parseInt(seasonsResponse.MRData.total, 10),
           loading: false
+        }, function () {
+          if (!_this3.props.activeSeason) {
+            _this3.props.onSeasonSelect(_this3.state.seasons[0].season);
+
+            _this3.setActiveSeason(_this3.state.seasons[0].season);
+          }
         });
       }).catch(function (err) {
         console.error('Error while getting all seasons:', err);
@@ -85,17 +95,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var years = this.state.seasons.map(function (s) {
         return React.createElement("button", {
-          className: s.season === _this3.state.activeSeason ? 'primary raised' : 'primary',
+          className: s.season === _this4.state.activeSeason ? 'primary raised' : 'primary',
           href: s.url,
           key: s.season,
           onClick: function onClick() {
-            _this3.props.onSeasonSelect(s.season);
-
-            _this3.setActiveSeason(s.season);
+            _this4.setActiveSeason(s.season);
           }
         }, s.season);
       });

@@ -39,7 +39,6 @@ function (_React$Component) {
     key: "onRaceSelected",
     value: function onRaceSelected(e, r) {
       if (this.state.race && this.state.race.round === r.round) e.preventDefault();
-      console.log('Selecting race:', r);
       this.setState({
         race: r
       });
@@ -49,7 +48,7 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log('this.props.season:', this.props.activeSeason);
+      console.log('Rendering');
       var races;
       var selectedRaceLocation;
 
@@ -68,23 +67,25 @@ function (_React$Component) {
 
       if (this.state.race) {
         selectedRaceLocation = {
-          lat: parseInt(this.state.race.Circuit.Location.lat, 10),
-          lng: parseInt(this.state.race.Circuit.Location.long, 10)
+          center: {
+            lat: parseFloat(this.state.race.Circuit.Location.lat),
+            lng: parseFloat(this.state.race.Circuit.Location.long)
+          },
+          zoom: 13
         };
       }
 
       return React.createElement("div", {
         id: "seasonDetail"
-      }, this.props.activeSeason ? React.createElement(React.Fragment, null, React.createElement("h2", null, this.props.activeSeason.season), React.createElement("div", {
+      }, this.props.activeSeason ? React.createElement(React.Fragment, null, React.createElement("h1", null, this.props.activeSeason.season), React.createElement("div", {
         id: "seasonDetailMainRow"
       }, React.createElement("section", {
         id: "seasonRoundsList"
-      }, races), this.state.race ? React.createElement(GoogleMap, {
-        location: {
-          center: selectedRaceLocation,
-          zoom: 13
-        }
-      }) : React.createElement("h3", null, "Select a race!"))) : React.createElement("h2", null, "Pick a season!"));
+      }, races), React.createElement("section", {
+        id: "raceMapContainer"
+      }, this.state.race && selectedRaceLocation ? React.createElement(GoogleMap, {
+        location: selectedRaceLocation
+      }) : React.createElement("h3", null, "Select a race!")))) : React.createElement("h2", null, "Pick a season!"));
     }
   }]);
 
