@@ -14,7 +14,6 @@ class SeasonDetail extends React.Component {
 	}
 
 	render() {
-		console.log('Rendering')
 		let races;
 		let selectedRaceLocation;
 		if (this.props.activeSeason) {
@@ -47,13 +46,16 @@ class SeasonDetail extends React.Component {
 								{races}
 							</section>
 							<section id="raceMapContainer">
-								{this.state.race && selectedRaceLocation ? (
-									<GoogleMap location={selectedRaceLocation} />
-								) : (
-									<h3>Select a race!</h3>
-								)}								
+							{this.state.race && selectedRaceLocation ? (
+								<GoogleMap location={selectedRaceLocation} />
+							) : (
+								<h3>Select a race!</h3>
+							)}
 							</section>
 						</div>
+						{this.state.race && selectedRaceLocation &&
+							<RaceResults race={this.state.race} />
+						}
 					</>
 				) : (
 					<h2>Pick a season!</h2>

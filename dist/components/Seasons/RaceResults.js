@@ -18,77 +18,72 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var SeasonDetail =
+var RaceResults =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(SeasonDetail, _React$Component);
+  _inherits(RaceResults, _React$Component);
 
-  function SeasonDetail(props) {
+  function RaceResults(props) {
     var _this;
 
-    _classCallCheck(this, SeasonDetail);
+    _classCallCheck(this, RaceResults);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SeasonDetail).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RaceResults).call(this, props));
     _this.state = {
-      race: undefined
+      results: undefined,
+      race: {
+        year: _this.props.race.season,
+        round: _this.props.race.round
+      }
     };
     return _this;
   }
 
-  _createClass(SeasonDetail, [{
-    key: "onRaceSelected",
-    value: function onRaceSelected(e, r) {
-      if (this.state.race && this.state.race.round === r.round) e.preventDefault();
-      this.setState({
-        race: r
+  _createClass(RaceResults, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (!this.state.race || !this.state.race.year || !this.state.race.round) {
+        console.error('Invalid race properties provided:', this.state.race);
+        return;
+      }
+
+      var urlFragment = "".concat(this.state.race.year, "/").concat(this.state.race.round, "/results");
+      var apiReq = new ApiRequest(urlFragment, 30, 0);
+      apiReq.send().then(function (results) {
+        _this2.setState({
+          results: results.MRData.RaceTable.Races[0]
+        });
+      }).catch(function (err) {
+        console.error('Error while fetching race results:', err);
       });
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {}
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
+      console.log('Results:', this.state.results);
       var races;
-      var selectedRaceLocation;
 
-      if (this.props.activeSeason) {
-        races = this.props.activeSeason.Races.map(function (race) {
-          return React.createElement("button", {
-            className: "secondary ".concat(_this2.state.race && _this2.state.race.round === race.round ? 'raised' : ''),
-            id: "".concat(race.season, "-").concat(race.round),
-            key: race.round,
-            onClick: function onClick(e) {
-              _this2.onRaceSelected(e, race);
-            }
-          }, race.raceName);
+      if (this.state.results) {
+        races = this.state.results.Results.map(function (pos) {
+          return React.createElement(RacePosition, {
+            position: pos,
+            key: pos.position
+          });
         });
       }
 
-      if (this.state.race) {
-        selectedRaceLocation = {
-          center: {
-            lat: parseFloat(this.state.race.Circuit.Location.lat),
-            lng: parseFloat(this.state.race.Circuit.Location.long)
-          },
-          zoom: 13
-        };
-      }
-
       return React.createElement("div", {
-        id: "seasonDetail"
-      }, this.props.activeSeason ? React.createElement(React.Fragment, null, React.createElement("h1", null, this.props.activeSeason.season), React.createElement("div", {
-        id: "seasonDetailMainRow"
-      }, React.createElement("section", {
-        id: "seasonRoundsList"
-      }, races), React.createElement("section", {
-        id: "raceMapContainer"
-      }, this.state.race && selectedRaceLocation ? React.createElement(GoogleMap, {
-        location: selectedRaceLocation
-      }) : React.createElement("h3", null, "Select a race!"))), this.state.race && selectedRaceLocation && React.createElement(RaceResults, {
-        race: this.state.race
-      })) : React.createElement("h2", null, "Pick a season!"));
+        id: "raceDetail"
+      }, this.state.results ? React.createElement(React.Fragment, null, React.createElement("header", null, React.createElement("h2", null, this.state.results.raceName), React.createElement("p", null, "Round ", this.state.results.round, " - ", new Date(this.state.results.date).toLocaleDateString())), React.createElement("div", {
+        id: "positionRow"
+      }, races)) : React.createElement("h3", null, "Race Results"));
     }
   }]);
 
-  return SeasonDetail;
+  return RaceResults;
 }(React.Component);
