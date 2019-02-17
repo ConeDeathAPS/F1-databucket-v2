@@ -1,12 +1,15 @@
 class Teams extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			selectedTeam: undefined,
+		};
 	}
 
 	render() {
 		return (
-			<main>
-				<h2>Teams</h2>
+			<main id="teams">
+				<TeamList />
 			</main>
 		);
 	}

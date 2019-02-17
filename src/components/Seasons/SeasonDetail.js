@@ -3,6 +3,8 @@ class SeasonDetail extends React.Component {
 		super(props);
 		this.state = {
 			race: undefined,
+			raceResults: undefined,
+			loadingResults: false,
 		};
 	}
 
@@ -10,6 +12,30 @@ class SeasonDetail extends React.Component {
 		if (this.state.race && this.state.race.round === r.round) e.preventDefault();
 		this.setState({
 			race: r,
+		}, () => {
+			this.fetchRaceResults();
+		});
+	}
+
+	fetchRaceResults() {
+		if (!this.state.race || !this.state.race.season || !this.state.race.round) {
+			console.error('Invalid race properties provided:', this.state.race);
+			return;
+		}
+		this.setState({
+			loadingResults: true,
+		});
+		const urlFragment = `${this.state.race.season}/${this.state.race.round}/results`;
+		const apiReq = new ApiRequest(urlFragment, 30, 0);
+		apiReq.send()
+		.then((results) => {
+			this.setState({
+				raceResults: results.MRData.RaceTable.Races[0],
+				loadingResults: false,
+			});
+		})
+		.catch((err) => {
+			console.error('Error while fetching race results:', err);
 		});
 	}
 
@@ -39,27 +65,27 @@ class SeasonDetail extends React.Component {
 		return (
 			<div id="seasonDetail">
 				{this.props.activeSeason ? (
-					<>
-						<h1>{this.props.activeSeason.season}</h1>
-						<div id="seasonDetailMainRow">
-							<section id="seasonRoundsList">
-								{races}
-							</section>
-							<section id="raceMapContainer">
+					<div id="seasonDetailMainRow">
+						<section id="seasonRoundsList">
+							{races}
+						</section>
+						<section id="raceMapContainer">
 							{this.state.race && selectedRaceLocation ? (
 								<GoogleMap location={selectedRaceLocation} />
 							) : (
 								<h3>Select a race!</h3>
 							)}
-							</section>
-						</div>
-						{this.state.race && selectedRaceLocation &&
-							<RaceResults race={this.state.race} />
-						}
-					</>
+						</section>
+					</div>
 				) : (
 					<h2>Pick a season!</h2>
 				)}
+				{this.state.raceResults && !this.state.loadingResults &&
+					<RaceResults results={this.state.raceResults} />
+				}
+				{this.state.loadingResults &&
+					<p>Loading...</p>
+				}
 			</div>
 		);
 	}

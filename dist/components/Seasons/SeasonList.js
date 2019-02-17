@@ -43,7 +43,7 @@ function (_React$Component) {
   _createClass(SeasonList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchSeasons(1, 25);
+      this.fetchSeasons(1, 50);
     }
   }, {
     key: "componentWillUnmount",
@@ -111,14 +111,9 @@ function (_React$Component) {
         id: "seasonsList"
       }, React.createElement("section", {
         id: "headerRow"
-      }, React.createElement("input", {
-        type: "text",
-        value: this.state.yearFilter,
-        placeholder: "Search for a year",
-        disabled: this.state.loading
-      }), this.state.totalSeasons > 0 && React.createElement(Paginator, {
+      }, this.state.totalSeasons > 0 && React.createElement(Paginator, {
         totalItems: this.state.totalSeasons,
-        fetchSeasons: this.fetchSeasons,
+        fetchItems: this.fetchSeasons,
         isDisabled: this.state.loading
       })), React.createElement("section", {
         id: "seasonsPage"

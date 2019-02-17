@@ -31,8 +31,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Paginator).call(this, props));
     _this.state = {
       pageNumber: 1,
-      pageSize: 25,
-      pageSizes: [10, 25, 50],
+      pageSize: 50,
+      pageSizes: [10, 25, 50, 100],
       totalItems: _this.props.totalItems,
       allPages: []
     };
@@ -72,7 +72,7 @@ function (_React$Component) {
   }, {
     key: "goToPage",
     value: function goToPage(page) {
-      this.props.fetchSeasons(page, this.state.pageSize);
+      this.props.fetchItems(page, this.state.pageSize);
       this.setState({
         pageNumber: page
       });
@@ -85,7 +85,7 @@ function (_React$Component) {
       this.setState({
         pageSize: parseInt(e.target.value, 10)
       }, function () {
-        _this2.props.fetchSeasons(_this2.state.pageNumber, _this2.state.pageSize);
+        _this2.props.fetchItems(_this2.state.pageNumber, _this2.state.pageSize);
 
         _this2.getAllPages();
       });
@@ -94,7 +94,7 @@ function (_React$Component) {
     key: "onNextPage",
     value: function onNextPage(e) {
       if (!this.state.allPages[this.state.pageNumber]) e.preventDefault();
-      this.props.fetchSeasons(this.state.pageNumber + 1, this.state.pageSize);
+      this.props.fetchItems(this.state.pageNumber + 1, this.state.pageSize);
       var currentPage = this.state.pageNumber;
       this.setState({
         pageNumber: currentPage + 1
@@ -104,7 +104,7 @@ function (_React$Component) {
     key: "onPreviousPage",
     value: function onPreviousPage(e) {
       if (this.state.pageNumber === 1) e.preventDefault();
-      this.props.fetchSeasons(this.state.pageNumber - 1, this.state.pageSize);
+      this.props.fetchItems(this.state.pageNumber - 1, this.state.pageSize);
       var currentPage = this.state.pageNumber;
       this.setState({
         pageNumber: currentPage - 1

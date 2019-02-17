@@ -43,7 +43,11 @@ class Seasons extends React.Component {
 		return (
 			<main id="seasons">
 				<SeasonList onSeasonSelect={this.onSeasonSelect} />
-				<SeasonDetail activeSeason={this.state.activeSeason} />
+				{!this.state.loading ? (
+					<SeasonDetail activeSeason={this.state.activeSeason} />
+				) : (
+					<h3>Loading...</h3>
+				)}
 			</main>
 		)
 	}

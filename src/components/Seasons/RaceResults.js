@@ -2,42 +2,16 @@ class RaceResults extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			results: undefined,
-			race: {
-				year: this.props.race.season,
-				round: this.props.race.round,
-			},
+			results: this.props.results,
 		};
 	}
 
-	componentDidMount() {
-		if (!this.state.race || !this.state.race.year || !this.state.race.round) {
-			console.error('Invalid race properties provided:', this.state.race);
-			return;
-		}
-		const urlFragment = `${this.state.race.year}/${this.state.race.round}/results`;
-		const apiReq = new ApiRequest(urlFragment, 30, 0);
-		apiReq.send()
-		.then((results) => {
-			this.setState({
-				results: results.MRData.RaceTable.Races[0],
-			});
-		})
-		.catch((err) => {
-			console.error('Error while fetching race results:', err);
-		});
-	}
-
-	componentWillUnmount() {
-
-	}
-
 	render() {
-		console.log('Results:', this.state.results);
+		console.log('Rendering with round:', this.state.results.round);
 		let races;
 		if (this.state.results) {
 			races = this.state.results.Results.map(pos => (
-				<RacePosition position={pos} key={pos.position} />
+				<RacePosition position={pos} key={pos.Driver.driverId} />
 			));			
 		}
 		return (

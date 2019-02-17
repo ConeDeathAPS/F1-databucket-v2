@@ -216,17 +216,18 @@ select:focus {
   align-items: center;
 }
 main#seasons {
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   height: 100%;
 }
 main#seasons #seasonsList {
   box-sizing: border-box;
-  width: 30%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: start;
   align-items: start;
   flex-wrap: wrap;
+  width: 30%;
 }
 main#seasons #seasonsList #headerRow {
   display: flex;
@@ -247,15 +248,16 @@ main#seasons #seasonsList #seasonsPage {
   align-items: start;
   flex-wrap: wrap;
   width: 100%;
+  max-height: 90%;
 }
 main#seasons #seasonDetail {
   box-sizing: border-box;
-  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: stretch;
   margin-left: 15px;
+  width: 60%;
 }
 main#seasons #seasonDetail #seasonDetailMainRow {
   display: flex;
@@ -263,16 +265,18 @@ main#seasons #seasonDetail #seasonDetailMainRow {
   box-sizing: border-box;
   flex-direction: row;
   justify-content: space-between;
-  align-items: top;
+  align-items: start;
   min-height: 400px;
   padding-top: 15px;
+  flex: 4;
 }
 main#seasons #seasonDetail #seasonDetailMainRow #seasonRoundsList {
   display: flex;
-  width: 40%;
+  width: 50%;
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  overflow-y: auto;
 }
 main#seasons #seasonDetail #seasonDetailMainRow #seasonRoundsList button {
   font-size: 1.4em;
@@ -283,7 +287,7 @@ main#seasons #seasonDetail #seasonDetailMainRow #raceMapContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 }
 main#seasons #seasonDetail #seasonDetailMainRow #raceMapContainer #gMap {
   height: 400px;
@@ -297,7 +301,7 @@ main#seasons #seasonDetail #raceDetail {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding-top: 15px;
+  flex: 2;
 }
 main#seasons #seasonDetail #raceDetail header {
   text-align: center;
@@ -306,6 +310,8 @@ main#seasons #seasonDetail #raceDetail header {
 main#seasons #seasonDetail #raceDetail #positionRow {
   display: flex;
   flex-direction: row;
+  justify-content: start;
+  align-items: stretch;
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
@@ -313,10 +319,52 @@ main#seasons #seasonDetail #raceDetail #positionRow {
 }
 main#seasons #seasonDetail #raceDetail #positionRow .racePosition {
   margin: 5px;
-  height: 100%;
-  width: 200px;
+  padding: 5px;
+  box-sizing: border-box;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  border: 1px solid #4f5b62;
+  border-radius: 4;
+}
+main#seasons #seasonDetail #raceDetail #positionRow .racePosition div {
+  text-align: center;
+  flex: 1;
+}
+main#teams {
+  justify-content: center;
+  align-items: stretch;
+  height: 100%;
+}
+main#teams #teamsList {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  width: 30%;
+}
+main#teams #teamsList #headerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 5px;
+  padding: 0px 0px 10px 0px;
+  border-bottom: 1px solid #4f5b62;
+}
+main#teams #teamsList #teamsPage {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  width: 100%;
+  max-height: 90%;
 }

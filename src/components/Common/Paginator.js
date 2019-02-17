@@ -3,8 +3,8 @@ class Paginator extends React.Component {
 		super(props);
 		this.state = {
 			pageNumber: 1,
-			pageSize: 25,
-			pageSizes: [10, 25, 50],
+			pageSize: 50,
+			pageSizes: [10, 25, 50, 100],
 			totalItems: this.props.totalItems,
 			allPages: [],
 		};
@@ -38,7 +38,7 @@ class Paginator extends React.Component {
 	}
 
 	goToPage(page) {
-		this.props.fetchSeasons(page, this.state.pageSize);
+		this.props.fetchItems(page, this.state.pageSize);
 		this.setState({
 			pageNumber: page,
 		});
@@ -48,14 +48,14 @@ class Paginator extends React.Component {
 		this.setState({
 			pageSize: parseInt(e.target.value, 10),
 		}, () => {
-			this.props.fetchSeasons(this.state.pageNumber, this.state.pageSize)
+			this.props.fetchItems(this.state.pageNumber, this.state.pageSize)
 			this.getAllPages();	
 		});
 	}
 
 	onNextPage(e) {
 		if (!this.state.allPages[this.state.pageNumber]) e.preventDefault();
-		this.props.fetchSeasons(this.state.pageNumber + 1, this.state.pageSize);
+		this.props.fetchItems(this.state.pageNumber + 1, this.state.pageSize);
 		const currentPage = this.state.pageNumber;
 		this.setState({
 			pageNumber: currentPage + 1,
@@ -64,7 +64,7 @@ class Paginator extends React.Component {
 
 	onPreviousPage(e) {
 		if (this.state.pageNumber === 1) e.preventDefault();
-		this.props.fetchSeasons(this.state.pageNumber - 1, this.state.pageSize);
+		this.props.fetchItems(this.state.pageNumber - 1, this.state.pageSize);
 		const currentPage = this.state.pageNumber;
 		this.setState({
 			pageNumber: currentPage - 1,

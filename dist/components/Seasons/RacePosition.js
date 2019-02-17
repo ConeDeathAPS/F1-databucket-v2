@@ -36,11 +36,18 @@ function (_React$Component) {
   }
 
   _createClass(RacePosition, [{
+    key: "determinePlacesChanged",
+    value: function determinePlacesChanged(position) {
+      return parseInt(position.grid, 10) - parseInt(position.position, 10);
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement("article", {
         className: "racePosition"
-      }, React.createElement("h1", null, this.state.position.position), React.createElement("div", null, React.createElement("p", null, "#", this.state.position.number, " - ", React.createElement("b", null, this.state.position.Driver.givenName, " ", this.state.position.Driver.familyName))));
+      }, React.createElement("h1", null, this.state.position.position), React.createElement("div", null, React.createElement("h4", null, "#", this.state.position.number, " - ", React.createElement("b", null, this.state.position.Driver.givenName, " ", this.state.position.Driver.familyName)), React.createElement("p", null, this.state.position.Constructor.name), React.createElement("p", null, this.state.position.laps, " laps", this.state.position.position === '1' ? " - ".concat(this.state.position.Time.time) : ''), React.createElement("p", null, "Starting position: ", this.state.position.grid)), React.createElement("p", {
+        className: "positionFooter"
+      }, this.state.position.status));
     }
   }]);
 

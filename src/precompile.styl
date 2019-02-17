@@ -209,16 +209,17 @@ input, textarea, select
 	align-items: center
 
 main#seasons
-	flex-wrap: wrap
+	justify-content: center
+	align-items: stretch
 	height: 100%
 	#seasonsList
 		box-sizing: border-box
-		width: 30%
 		display: flex
-		flex-direction: row
+		flex-direction: column
 		justify-content: start
 		align-items: start
 		flex-wrap: wrap
+		width: 30%
 		#headerRow
 			display: flex
 			flex-direction: row
@@ -237,29 +238,32 @@ main#seasons
 			align-items: start
 			flex-wrap: wrap
 			width: 100%
+			max-height: 90%
 	#seasonDetail
 		box-sizing: border-box
-		width: 60%
 		display: flex
 		flex-direction: column
 		justify-content: start
-		align-items: center
+		align-items: stretch
 		margin-left: 15px
+		width: 60%
 		#seasonDetailMainRow
 			display: flex
 			width: 100%
 			box-sizing: border-box
 			flex-direction: row
 			justify-content: space-between
-			align-items: top
+			align-items: start
 			min-height: 400px
 			padding-top: 15px
+			flex: 4
 			#seasonRoundsList
 				display: flex
-				width: 40%
+				width: 50%
 				flex-direction: column
 				justify-content: start
 				align-items: start
+				overflow-y: auto
 				button
 					font-size: 1.4em
 			#raceMapContainer
@@ -268,7 +272,7 @@ main#seasons
 				display: flex
 				flex-direction: row
 				justify-content: center
-				align-items: center
+				align-items: start
 				#gMap
 					height: 400px
 					width: 100%
@@ -280,28 +284,62 @@ main#seasons
 			flex-direction: column
 			justify-content: start
 			align-items: center
-			padding-top: 15px
+			flex: 2
 			header
 				text-align: center
 				width: 100%
 			#positionRow
 				display: flex
 				flex-direction: row
+				justify-content: start
+				align-items: stretch
 				width: 100%
 				max-width: 100%
 				overflow-x: auto
 				height: 100%
 				.racePosition
 					margin: 5px
-					height: 100%
-					width: 200px
+					padding: 5px
+					box-sizing: border-box
+					min-width: 200px
 					display: flex
 					flex-direction: column
 					justify-content: start
 					align-items: center
-				
-				
-				
-				
-				
+					border: 1px solid primaryLight(1)
+					border-radius: 4
+					div
+						text-align: center
+						flex: 1
 
+main#teams
+	justify-content: center
+	align-items: stretch
+	height: 100%
+	#teamsList
+		box-sizing: border-box
+		display: flex
+		flex-direction: column
+		justify-content: start
+		align-items: start
+		flex-wrap: wrap
+		width: 30%
+		#headerRow
+			display: flex
+			flex-direction: row
+			justify-content: space-between
+			align-items: center
+			width: 100%
+			box-sizing: border-box
+			margin: 5px
+			padding: 0px 0px 10px 0px
+			border-bottom: 1px solid primaryLight(1)
+		#teamsPage
+			box-sizing: border-box
+			display: flex
+			flex-direction: column
+			justify-content: start
+			align-items: start
+			flex-wrap: wrap
+			width: 100%
+			max-height: 90%

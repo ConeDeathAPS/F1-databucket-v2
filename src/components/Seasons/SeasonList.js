@@ -12,7 +12,7 @@ class SeasonList extends React.Component {
 	}
 
 	componentDidMount() {
-		this.fetchSeasons(1, 25);
+		this.fetchSeasons(1, 50);
 	}
 
 	componentWillUnmount() {
@@ -69,9 +69,8 @@ class SeasonList extends React.Component {
 		return (
 			<div id="seasonsList">
 				<section id="headerRow">
-					<input type="text" value={this.state.yearFilter} placeholder="Search for a year" disabled={this.state.loading} />
 					{ this.state.totalSeasons > 0 &&
-						<Paginator totalItems={this.state.totalSeasons} fetchSeasons={this.fetchSeasons} isDisabled={this.state.loading} />
+						<Paginator totalItems={this.state.totalSeasons} fetchItems={this.fetchSeasons} isDisabled={this.state.loading} />
 					}				
 				</section>
 				<section id="seasonsPage">

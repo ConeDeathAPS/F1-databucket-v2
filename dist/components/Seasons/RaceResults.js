@@ -30,49 +30,22 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RaceResults).call(this, props));
     _this.state = {
-      results: undefined,
-      race: {
-        year: _this.props.race.season,
-        round: _this.props.race.round
-      }
+      results: _this.props.results
     };
     return _this;
   }
 
   _createClass(RaceResults, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (!this.state.race || !this.state.race.year || !this.state.race.round) {
-        console.error('Invalid race properties provided:', this.state.race);
-        return;
-      }
-
-      var urlFragment = "".concat(this.state.race.year, "/").concat(this.state.race.round, "/results");
-      var apiReq = new ApiRequest(urlFragment, 30, 0);
-      apiReq.send().then(function (results) {
-        _this2.setState({
-          results: results.MRData.RaceTable.Races[0]
-        });
-      }).catch(function (err) {
-        console.error('Error while fetching race results:', err);
-      });
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {}
-  }, {
     key: "render",
     value: function render() {
-      console.log('Results:', this.state.results);
+      console.log('Rendering with round:', this.state.results.round);
       var races;
 
       if (this.state.results) {
         races = this.state.results.Results.map(function (pos) {
           return React.createElement(RacePosition, {
             position: pos,
-            key: pos.position
+            key: pos.Driver.driverId
           });
         });
       }

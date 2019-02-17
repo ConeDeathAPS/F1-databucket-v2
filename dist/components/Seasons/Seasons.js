@@ -82,9 +82,9 @@ function (_React$Component) {
         id: "seasons"
       }, React.createElement(SeasonList, {
         onSeasonSelect: this.onSeasonSelect
-      }), React.createElement(SeasonDetail, {
+      }), !this.state.loading ? React.createElement(SeasonDetail, {
         activeSeason: this.state.activeSeason
-      }));
+      }) : React.createElement("h3", null, "Loading..."));
     }
   }]);
 

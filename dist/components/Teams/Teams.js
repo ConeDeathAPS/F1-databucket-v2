@@ -24,15 +24,23 @@ function (_React$Component) {
   _inherits(Teams, _React$Component);
 
   function Teams(props) {
+    var _this;
+
     _classCallCheck(this, Teams);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Teams).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Teams).call(this, props));
+    _this.state = {
+      selectedTeam: undefined
+    };
+    return _this;
   }
 
   _createClass(Teams, [{
     key: "render",
     value: function render() {
-      return React.createElement("main", null, React.createElement("h2", null, "Teams"));
+      return React.createElement("main", {
+        id: "teams"
+      }, React.createElement(TeamList, null));
     }
   }]);
 
